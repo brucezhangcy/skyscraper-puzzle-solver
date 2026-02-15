@@ -200,7 +200,7 @@
     const userGrid = readGrid();
 
     if (clues.every(c => c === 0) && userGrid.flat().every(v => v === 0)) {
-      showMessage('请先输入边框线索或格子数字！', 'error');
+      showMessage('Please enter border clues or grid numbers first!', 'error');
       return;
     }
 
@@ -208,22 +208,22 @@
     solver.setClues(clues);
     solver.grid = userGrid.map(r => r.slice());
 
-    showMessage('求解中...', 'info');
+    showMessage('Solving...', 'info');
 
     setTimeout(() => {
       const solved = solver.solve();
       if (solved) {
         writeSolution(solver.grid);
         currentSolution = solver.grid.map(r => r.slice());
-        showMessage('求解成功！', 'success');
+        showMessage('Solved!', 'success');
       } else {
-        showMessage('无解——请检查线索是否正确。', 'error');
+        showMessage('No solution found — please check your clues.', 'error');
       }
     }, 50);
   }
 
   function generatePuzzle() {
-    showMessage('生成谜题中...', 'info');
+    showMessage('Generating puzzle...', 'info');
     buildBoard();
 
     setTimeout(() => {
@@ -236,8 +236,8 @@
 
       const clueCount = puzzle.clues.filter(c => c > 0).length;
       const totalClues = 4 * n;
-      const labels = { easy: '简单', medium: '中等', hard: '困难' };
-      showMessage(`谜题已生成！线索 ${clueCount}/${totalClues}（${labels[currentDifficulty]}）`, 'success');
+      const labels = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+      showMessage(`Puzzle generated! Clues: ${clueCount}/${totalClues} (${labels[currentDifficulty]})`, 'success');
     }, 50);
   }
 
