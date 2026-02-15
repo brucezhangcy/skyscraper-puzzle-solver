@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skyscraper Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🏙️ Skyscraper Puzzle</h1>
+    <div class="controls">
+      <div class="size-selector">
+        <label>棋盘大小：</label>
+        <button class="size-btn active" data-size="4">4×4</button>
+        <button class="size-btn" data-size="5">5×5</button>
+        <button class="size-btn" data-size="6">6×6</button>
+      </div>
+      <div class="actions">
+        <button id="solveBtn" class="action-btn solve">求解</button>
+        <button id="generateBtn" class="action-btn generate">生成谜题</button>
+        <button id="clearBtn" class="action-btn clear">清空</button>
+      </div>
+      <div class="difficulty-selector">
+        <label>难度：</label>
+        <button class="diff-btn" data-diff="easy">简单</button>
+        <button class="diff-btn active" data-diff="medium">中等</button>
+        <button class="diff-btn" data-diff="hard">困难</button>
+      </div>
+    </div>
+    <div class="board-wrapper">
+      <div id="board"></div>
+    </div>
+    <div id="message" class="message"></div>
+    <div class="instructions">
+      <h3>玩法说明</h3>
+      <p>在格子里填入 1~N 的数字，每行每列不能重复。</p>
+      <p>边框的数字表示从该方向看过去能看到几栋"摩天大楼"——高楼会挡住后面的矮楼。</p>
+      <p><strong>求解：</strong>填入边框线索后点击"求解"。<strong>生成：</strong>选择难度后点击"生成谜题"。</p>
+    </div>
+  </div>
+  <script src="solver.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

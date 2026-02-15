@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  color: #e0e0e0;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #f6d365, #fda085);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.size-selector, .difficulty-selector, .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+label {
+  font-size: 0.95rem;
+  color: #aaa;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.size-btn, .diff-btn {
+  padding: 8px 18px;
+  background: rgba(255,255,255,0.08);
+  color: #ccc;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.size-btn:hover, .diff-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.size-btn.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 12px rgba(102,126,234,0.4);
+}
+
+.diff-btn.active {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 12px rgba(245,87,108,0.4);
+}
+
+.action-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.action-btn.solve {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  box-shadow: 0 3px 14px rgba(56,239,125,0.3);
+}
+
+.action-btn.generate {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 3px 14px rgba(102,126,234,0.3);
+}
+
+.action-btn.clear {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Board */
+.board-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#board {
+  display: inline-grid;
+  gap: 0;
+  user-select: none;
+}
+
+.cell {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  position: relative;
+}
+
+/* Clue cells (around the border) */
+.cell.clue {
+  color: #f6d365;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.cell.clue input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f6d365;
+  outline: none;
+  caret-color: #f6d365;
+}
+
+.cell.clue input::placeholder {
+  color: rgba(246,211,101,0.25);
+}
+
+.cell.clue input:focus {
+  background: rgba(246,211,101,0.08);
+  border-radius: 6px;
+}
+
+/* Corner cells (empty) */
+.cell.corner {
+  /* empty */
+}
+
+/* Grid cells */
+.cell.grid-cell {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cell.grid-cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  outline: none;
+  caret-color: #38ef7d;
+}
+
+.cell.grid-cell input::placeholder {
+  color: rgba(255,255,255,0.12);
+}
+
+.cell.grid-cell input:focus {
+  background: rgba(102,126,234,0.12);
+}
+
+.cell.grid-cell.solved input {
+  color: #38ef7d;
+}
+
+.cell.grid-cell.user-filled input {
+  color: #82b1ff;
+}
+
+.cell.grid-cell.error {
+  background: rgba(245,87,108,0.15);
+}
+
+.cell.grid-cell.error input {
+  color: #f5576c;
+}
+
+/* Message */
+.message {
+  min-height: 28px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.message.success {
+  color: #38ef7d;
+}
+
+.message.error {
+  color: #f5576c;
+}
+
+.message.info {
+  color: #82b1ff;
+}
+
+/* Instructions */
+.instructions {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 18px 24px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.instructions h3 {
+  margin-bottom: 8px;
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.instructions p {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .cell {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+  .cell.grid-cell input { font-size: 1.2rem; }
+  .cell.clue input { font-size: 0.95rem; }
+  h1 { font-size: 1.6rem; }
+}
